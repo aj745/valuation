@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meilleurs Agents - Listing de propriété</title>
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        body {
+            font-family: "Poppins", sans-serif;
+            margin: 0;
+            background-color: #FFF;
+        }
+        .container {
+            max-width: 95%;
+            margin: 0 auto;
+            background-color: white;
+            padding: 0px 0px 20px 0px;
+        }
+        .logo {
+            font-weight: bold;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+        .progress-bar {
+            height: 6px;
+            background-color: #C4D4F7;
+            margin-bottom: 48px;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            border-radius: 20px;
+            background-color: #0066FF;
+            transition: width 0.3s ease;
+        }
+        h2 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 24px;
+            color:  #323232;
+        }
+        h3 {
+            margin-top: 0;
+            font-size: 14px;
+            color: #646464;
+            font-weight: normal;
+            margin-bottom: 24px;
+        }
+        .form-group {
+            margin-bottom: 24px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color:#323232;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #AEAEAE;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+            font-weight: regular;
+            margin: 0;      
+              -webkit-box-sizing: border-box;
+              -moz-box-sizing: border-box;
+              box-sizing: border-box;
+              -webkit-appearance: none;
+              -moz-appearance: none;
+        }
+        .error {
+            color: #B32730;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .button-group {
+            display: flex;
+            margin-top: 32px;
+            gap: 8px;
+        }
+        #step4 label {
+            display:flex;
+            gap: 8px;
+            align-items: center;
+            font-weight: normal;
+            margin-bottom: 0;
+            height: 48px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            height: 48px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: "Poppins", sans-serif;
+        }
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+          -moz-appearance: textfield;
+        }
+        button#prevBtn {
+            background-color: #FFF;
+            border: 2px solid #323232;
+            color: #323232;
+        }
+        button[type="submit"] {
+            background-color: #0066FF;
+            color: white;
+        }
+        button[type="button"], #submitBtn {
+            background-color: #003DF5;
+            color: #FFF;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size:  16px;
+        }
+        .property-type {
+            display: flex;
+            gap: 16px;
+        }
+        .property-type label {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input{
+            font-family: "Poppins", sans-serif;
+            height: 48px;
+        }
+        input:user-invalid{
+          border: 2px solid #B32730;
+        }
+        .property-type input[type="radio"] {
+            display: none;
+        }
+        .property-type input[type="radio"]:checked + label {
+            background-color: #0066FF;
+            color: white;
+        }
+        select.minimal {
+              background-image:
+                linear-gradient(45deg, transparent 50%, gray 50%),
+                linear-gradient(135deg, gray 50%, transparent 50%),
+                linear-gradient(to right, #FFF, #FFF);
+              background-position:
+                calc(100% - 20px) calc(1em + 2px),
+                calc(100% - 15px) calc(1em + 2px),
+                calc(100% - 2.5em) 0.5em;
+              background-size:
+                5px 5px,
+                5px 5px,
+                1px 1.5em;
+              background-repeat: no-repeat;
+            }
+
+            select.minimal:focus {
+              background-image:
+                linear-gradient(45deg, green 50%, transparent 50%),
+                linear-gradient(135deg, transparent 50%, green 50%),
+                linear-gradient(to right, #FFF, #FFF);
+              background-position:
+                calc(100% - 15px) 1em,
+                calc(100% - 20px) 1em,
+                calc(100% - 2.5em) 0.5em;
+              background-size:
+                5px 5px,
+                5px 5px,
+                1px 1.5em;
+              background-repeat: no-repeat;
+              border-color: green;
+              outline: 0;
+            }
+            h4 {
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 20px;
+                color: #323232;
+            }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo" style="display: flex; align-items: center; gap: 32px; height:72px;height: 60px;margin-top: 12px;"><img src="./brand-logo.png" style="width:170px;height:auto;"></img><h4 id="current-step" style="margin:0">Étape 1/5 : Localisation</h4></div>
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+        <div class="subcontainer" style="max-width: 600px; margin:0 auto;">
+            
+            <form id="propertyForm">
+                <div id="step1" class="step">
+                    <h2>Quelle est l'adresse du bien ?</h2>
+                    <h3>* Information obligatoire</h3>
+                    <div class="form-group">
+                        <label for="address">Adresse *</label>
+                        <input type="text" id="address" name="address" placeholder="Saisissez une adresse" required style="max-width:453px;">
+                        <div class="error" id="addressError"></div>
+                    </div>
+                </div>
+
+                <div id="step2" class="step" style="display: none;">
+                    <h2>S'agit-il d'une maison ou d'un appartement ?</h2>
+                    <h3>* Information obligatoire</h3>
+                    <div class="form-group">
+                        <div class="property-type">
+                            <input type="radio" id="apartment" name="propertyType" value="apartment" required>
+                            <label for="apartment" style="max-width:160px;padding:16px;border-radius:16px"><img src="./flat.png" style="width:72px;"></img><br/>Appartement</label>
+                            <input type="radio" id="house" name="propertyType" value="house">
+                            <label for="house" style="max-width:160px;padding:16px;border-radius:16px;"><img src="./house.png" style="width:72px;"></img><br/>Maison</label>
+                        </div>
+                        <div class="error" id="propertyTypeError"></div>
+                    </div>
+                </div>
+
+                <div id="step3" class="step" style="display: none;">
+                    <h2>Quelles sont ses principales caractéristiques ?</h2>
+                    <h3>* Informations obligatoires</h3>
+                    <div class="form-group" style="width:214.5px; 
+  position: relative;
+  display: inline-block;">
+                        <label for="surface">Surface *</label>
+                        <input type="number" id="surface" name="surface" required>
+                        <span style="position: absolute;    top: 37px;    right: 17px;   color: #646464;    font-size: 16px;">m2</span>
+                        <div class="error" id="surfaceError"></div>
+                    </div>
+                    <div class="container-field" style="display: inline-flex;gap:24px;">
+                        <div class="form-group" style="width:214.5px">
+                            <label for="rooms">Nombre de pièces *</label>
+                            <input type="number" id="rooms" name="rooms" required>
+                            <div class="error" id="roomsError"></div>
+                        </div>
+                        <div class="form-group" style="width:214.5px">
+                            <label for="bathrooms">Nombre de salles de bains *</label>
+                            <input type="number" id="bathrooms" name="bathrooms" required>
+                            <div class="error" id="bathroomsError"></div>
+                        </div>
+                    </div>
+                    <div class="container-field" style="display: inline-flex;gap:24px;">
+                        <div class="form-group"  style="margin-bottom: 0px;">
+                            <label for="floor" style="width:214.5px">Étage de l'appartement *</label>
+                            <input type="number" id="floor" name="floor" required>
+                            <div class="error" id="floorError"></div>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0px;">
+                            <label for="totalFloors" style="width:214.5px">Étages dans le bâtiment *</label>
+                            <input type="number" id="totalFloors" name="totalFloors" required>
+                            <div class="error" id="totalFloorsError"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="step4" class="step" style="display: none;">
+                    <h2>Quels sont ses avantages supplémentaires ?</h2>
+                    <h3>Ces informations sont facultatives mais nous permettent de vous donner une estimation plus précise.</h3>
+                    <div class="form-group">
+                        <label><input type="checkbox" name="features" value="elevator"> Ascenseur</label>
+                        <label><input type="checkbox" name="features" value="balcony"> Balcon ou terrasse</label>
+                        <label><input type="checkbox" name="features" value="garden"> Jardin privatif</label>
+                        <label><input type="checkbox" name="features" value="cellar"> Cave</label>
+                        <label><input type="checkbox" name="features" value="parking"> Place de parking extérieur</label>
+                        <label><input type="checkbox" name="features" value="garage"> Place de parking intérieur</label>
+                    </div>
+                </div>
+
+                <div id="step5" class="step" style="display: none;">
+                    <h2>Comment évaluez-vous son état ?</h2>
+                    <h3>Ces informations sont facultatives mais nous permettent de vous donner une estimation plus précise.</h3>
+                    <div class="container-field" style="display: inline-flex;gap:24px;">
+                        <div class="form-group" style="width:214.5px">
+                            <label for="constructionPeriod">Période de construction</label>
+                            <select id="constructionPeriod" name="constructionPeriod" class="minimal">
+                                <option value="">Choisir</option>
+                                <option value="before1949">Avant 1949</option>
+                                <option value="1949-1974">1949-1974</option>
+                                <option value="1975-1989">1975-1989</option>
+                                <option value="1990-2005">1990-2005</option>
+                                <option value="after2005">Après 2005</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="width:214.5px">
+                            <label for="energyRating">Diagnostic énergétique</label>
+                            <select id="energyRating" name="energyRating" class="minimal">
+                                <option value="">Choisir</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                <option value="F">F</option>
+                                <option value="G">G</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" style="width:214.5px">
+                        <label for="condition">Standing de la propriété</label>
+                        <select id="condition" name="condition" class="minimal">
+                            <option value="">Choisir</option>
+                            <option value="standard">Standard</option>
+                            <option value="goodCondition">Bon état</option>
+                            <option value="renovated">Rénové</option>
+                            <option value="exceptional">Exceptionnel</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" id="prevBtn" style="display: none;">Retour</button>
+                    <button type="button" id="nextBtn">Continuer</button>
+                    <button type="submit" id="submitBtn" style="display: none;">Obtenir le résultat</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 5;
+
+        function showStep(step) {
+
+                const contentstep = document.querySelector('#current-step');
+                if (currentStep==1) contentstep.innerHTML = "Étape 1/5 : Localisation";
+                if (currentStep==2) contentstep.innerHTML = "Étape 2/5 : Type de bien";
+                if (currentStep==3) contentstep.innerHTML = "Étape 3/5 : Caractéristiques";
+                if (currentStep==4) contentstep.innerHTML = "Étape 4/5 : Avantages";
+                if (currentStep==5) contentstep.innerHTML = "Étape 5/5 : État";
+
+
+            document.querySelectorAll('.step').forEach(s => s.style.display = 'none');
+            document.getElementById(`step${step}`).style.display = 'block';
+            document.getElementById('progress').style.width = `${(step / totalSteps) * 100}%`;
+            
+            document.getElementById('prevBtn').style.display = step > 1 ? 'block' : 'none';
+            document.getElementById('nextBtn').style.display = step < totalSteps ? 'block' : 'none';
+            document.getElementById('submitBtn').style.display = step === totalSteps ? 'block' : 'none';
+        }
+
+        function validateStep(step) {
+            const errors = [];
+            switch(step) {
+                case 1:
+                    if (!document.getElementById('address').value) {
+                        errors.push({ id: 'addressError', message: 'L\'adresse est obligatoire' });
+                    }
+                    break;
+                case 2:
+                    if (!document.querySelector('input[name="propertyType"]:checked')) {
+                        errors.push({ id: 'propertyTypeError', message: 'Veuillez sélectionner un type de propriété' });
+                    }
+                    break;
+                case 3:
+                    ['surface', 'rooms', 'bathrooms', 'floor', 'totalFloors'].forEach(field => {
+                        if (!document.getElementById(field).value) {
+                            errors.push({ id: `${field}Error`, message: 'Ce champ est obligatoire' });
+                        }
+                    });
+                    break;
+            }
+            return errors;
+        }
+
+        function showErrors(errors) {
+            document.querySelectorAll('.error').forEach(e => e.textContent = '');
+            errors.forEach(error => {
+                document.getElementById(error.id).textContent = error.message;
+            });
+        }
+
+        function hideError(inputId) {
+            const errorElement = document.getElementById(`${inputId}Error`);
+            if (errorElement) {
+                errorElement.textContent = '';
+            }
+        }
+
+        // Add this new function to set up focus event listeners
+        function setupErrorHiding() {
+            const inputs = document.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                input.addEventListener('focus', () => hideError(input.id));
+            });
+
+            // Special case for radio buttons
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => {
+                radio.addEventListener('focus', () => hideError('propertyType'));
+            });
+        }
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            const errors = validateStep(currentStep);
+            if (errors.length === 0) {
+                currentStep++;
+                showStep(currentStep);
+            } else {
+                showErrors(errors);
+            }
+        });
+
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            currentStep--;
+            showStep(currentStep);
+        });
+
+        document.getElementById('propertyForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const errors = validateStep(currentStep);
+            if (errors.length === 0) {
+                window.location.href = "https://www.figma.com/proto/ftBuw88rgtInGOv56QXmZ0/branch/dCPHpmXwkZ8bl8LbJ2dgJF/Valuation-tool?page-id=2826%3A29438&node-id=2826-32932&node-type=frame&viewport=188%2C46%2C0.09&t=H8ty1YDNhrXyYeKY-1&scaling=min-zoom&content-scaling=fixed&hide-ui=1";
+            } else {
+                showErrors(errors);
+            }
+        });
+
+        // Call this function to set up the error hiding behavior
+        setupErrorHiding();
+
+        showStep(currentStep);
+
+        document.querySelector("input[type='number']").addEventListener("keypress", function (evt) {
+    if (evt.which < 48 || evt.which > 57)
+    {
+        evt.preventDefault();
+    }
+});
+    </script>
+</body>
+</html>
